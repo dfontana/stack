@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grommet, Box, Heading } from "grommet";
+import wretch from "wretch";
 
 const theme = {
   global: {
@@ -28,7 +29,19 @@ const AppBar = props => (
 );
 
 class App extends Component {
+  state = {
+    message: ""
+  };
+
+  componentDidMount() {
+    wretch("/api/")
+      .get()
+      .json()
+      .then(({ message }) => this.setState({ message }));
+  }
+
   render() {
+    const { message } = this.state;
     return (
       <Grommet theme={theme} full>
         <Box fill>
@@ -39,7 +52,7 @@ class App extends Component {
           </AppBar>
           <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
             <Box flex align="center" justify="center">
-              app body
+              {`this is the app with: ${message}`}
             </Box>
             <Box
               width="medium"
