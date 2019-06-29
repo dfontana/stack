@@ -2,12 +2,15 @@ version: "3.7"
 services:
   api:
     build:
-      context: ./api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: api/Dockerfile
     volumes:
       - ./api:/app
+      - ./go.mod:/app/go.mod
+      - ./go.sum:/app/go.sum
     ports:
       - "8080:8080"
+    tty: true
 
   front:
     build:

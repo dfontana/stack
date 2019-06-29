@@ -6,6 +6,6 @@ COPY go.sum .
 RUN go mod download
 RUN go get github.com/githubnemo/CompileDaemon
 # Then the rest
-COPY . .
+COPY ./api/* ./
 
-CMD CompileDaemon -color=true -command="./api"
+CMD CompileDaemon -color=true -command="./stack"
