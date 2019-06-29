@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - ./api:/app
+    ports:
+      - "5000:8080"
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
